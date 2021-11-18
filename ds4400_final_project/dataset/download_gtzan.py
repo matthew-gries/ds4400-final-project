@@ -4,7 +4,6 @@ from ds4400_final_project.dataset.constants import DATASET_SLUG, DOWNLOAD_FOLDER
 
 
 def download_gtzan():
-
     api = KaggleApi()
     api.authenticate()
     api.dataset_download_files(
