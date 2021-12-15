@@ -71,7 +71,7 @@ def get_best_test_result(results: Dict[str, Dict[str, Tuple]]) -> Tuple:
 
 
 def get_title_from_filename(filename: str) -> str:
-    name, extension = filename.split(".")
+    name, _ = filename.split(".")
     return name.replace("_", " ").title()
 
 
@@ -84,7 +84,7 @@ def print_classifier_results(
     total_incorrect = sum(failed_count.values())
 
     print("=="*30)
-    print(get_title_from_filename(title))
+    print(title)
     print("=="*30)
     print(f"Train accuracy: {round(train_accuracy * 100, 2)}%")
     print(f"Train error:    {round((1-train_accuracy) * 100, 2)}%")
