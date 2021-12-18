@@ -2,26 +2,17 @@ import sys
 sys.path.append("../")
 
 from typing import Dict, Tuple
-
 import numpy as np
-from ds4400_final_project.dataset.load_gtzan import load_data_from_file
-from sklearn.model_selection import train_test_split
-
-
 
 def train_and_evaluate_classifier(
-    csv_filename: str,
     classifier,
-    test_size: float = 0.33,
-    random_state: int = 42,
+    X_train,
+    y_train,
+    X_val,
+    y_val,
+    index_genre_map,
+    genre_index_map
 ) -> Tuple[float, float, Dict[str, int]]:
-
-    # import the data from the seconds features CSV
-    X, y, index_genre_map, genre_index_map = load_data_from_file(csv_filename)
-
-    # split all the data into training and testing sets
-    X_train, X_test, y_train, y_test = train_test_split(
-        X, y, test_size=test_size, random_state=random_state)
 
     # train the classifier
     classifier.fit(X_train, y_train)
@@ -35,12 +26,12 @@ def train_and_evaluate_classifier(
     train_accuracy = classifier.score(X_train, y_train)
 
     # evaluate the model on testing data
-    test_pred = classifier.predict(X_test)
-    test_failed = np.where(np.not_equal(y_test.ravel(), test_pred))
-    y_test_failed = y_test[test_failed]
+    test_pred = classifier.predict(X_val)
+    test_failed = np.where(np.not_equal(y_val.ravel(), test_pred))
+    y_test_failed = y_val[test_failed]
 
     # compute the accuracy / error on the testing data
-    test_accuracy = classifier.score(X_test, y_test)
+    test_accuracy = classifier.score(X_val, y_val)
 
     failed_count: Dict[str, int] = {
         genre: 0 for genre in genre_index_map.keys()}
