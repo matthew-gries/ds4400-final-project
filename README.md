@@ -34,3 +34,8 @@ using `jupyter notebook`.
 
 `notebooks/neural_net.ipynb` contains all the code necessary to run multilayer perceptrons on the GTZAN dataset. The code can be ran
 using `jupyter notebook`. Note that this notebook takes approximately 15 - 20 minutes to run.
+
+## Visualization
+
+`notebooks/data_visualization` contains code that can be used to help visualize the features used for training. The code can be ran
+using `jupyter notebook`.
